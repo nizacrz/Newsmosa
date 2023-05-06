@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Home from "../screens/Home";
-import Search from "../screens/Search";
-import Bookmark from "../screens/Bookmark";
-import UserProfile from "../screens/UserProfile";
+import Home from "../screens/HomeScreen";
+import Search from "../screens/SearchScreen";
+import Bookmark from "../screens/BookmarkScreen";
+import UserProfile from "../screens/UserProfileScreen";
 
 const Tab = createBottomTabNavigator();
 

@@ -1,12 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import ScreenWrapper from "../components/ScreenWrapper.js";
 
 export default function Search() {
   return (
-    <View style={styles.container}>
-      <Text>SEARCH PAGE</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ScreenWrapper>
+      <View style={styles.container}>
+        <Text>SEARCH PAGE</Text>
+        <StatusBar style="auto" />
+      </View>
+    </ScreenWrapper>
   );
 }
 
