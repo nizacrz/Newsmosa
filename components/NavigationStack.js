@@ -19,7 +19,7 @@ export default function NavigationStack() {
             iconName = focused ? "ios-home" : "ios-home-outline";
           } else if (route.name === "Search") {
             iconName = focused ? "ios-search" : "ios-search-outline";
-          } else if (route.name === "Bookmark") {
+          } else if (route.name === "Bookmarks") {
             iconName = focused ? "ios-bookmark" : "ios-bookmark-outline";
           } else if (route.name === "Profile") {
             iconName = focused
@@ -34,7 +34,7 @@ export default function NavigationStack() {
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="Bookmark" component={Bookmark} />
+      <Tab.Screen name="Bookmarks" component={Bookmark} />
       <Tab.Screen name="Profile" component={UserProfile} />
     </Tab.Navigator>
   );

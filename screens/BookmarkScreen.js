@@ -6,6 +6,7 @@ import {
   View,
   Text,
   Image,
+  TouchableHighlight,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -63,7 +64,7 @@ export default function Bookmark() {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Ionicons name="arrow-back" size={24} color="#333" />
+            <Ionicons name="chevron-back" size={24} color="#02474C" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Saved Stories</Text>
         </View>
@@ -84,11 +85,13 @@ const styles = StyleSheet.create({
   backButton: {
     marginLeft: 8,
     marginRight: 16,
+    fontSize: 20,
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     marginLeft: 8,
+    color: "#02474C",
   },
   container: {
     flex: 1,
