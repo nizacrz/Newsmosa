@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   editIcon: {
     position: 'absolute',
     top: 265,
-    right: 55,
+    right: 60,
     zIndex: 1,
   },
 });
