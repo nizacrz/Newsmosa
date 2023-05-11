@@ -1,8 +1,8 @@
-import { View, Text, ImageBackground, StyleSheet } from "react-native";
-import React from "react";
-import HeadImage from "../assets/images/headImage.jpg";
 import { Ionicons } from "@expo/vector-icons";
+import React from "react";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { TouchableRipple } from "react-native-paper";
+import HeadImage from "../../assets/images/headImage.jpg";
 
 const HomeCard = ({ text, source, onPress, isBookmarked = false }) => {
   return (

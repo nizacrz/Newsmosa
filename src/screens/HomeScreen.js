@@ -1,28 +1,31 @@
+import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
   TextInput,
-  ScrollView,
+  View,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import ScreenWrapper from "../components/ScreenWrapper.js";
-import ProfileImage from "../assets/images/profile_image.jpg";
-import HomeCategoryCard from "../components/HomeCategoryCard.js";
-import CardImage1 from "../assets/images/card_image1.png";
-import CardImage2 from "../assets/images/card_image2.png";
-import CardImage3 from "../assets/images/card_image3.png";
-import HeadImage from "../assets/images/headImage.jpg";
 import { ImageBackground } from "react-native";
+import CardImage1 from "../../assets/images/card_image1.png";
+import CardImage2 from "../../assets/images/card_image2.png";
+import CardImage3 from "../../assets/images/card_image3.png";
+import HeadImage from "../../assets/images/headImage.jpg";
+import ProfileImage from "../../assets/images/profile_image.jpg";
 import HomeCard from "../components/HomeCard.js";
+import HomeCategoryCard from "../components/HomeCategoryCard.js";
+import ScreenWrapper from "../components/ScreenWrapper.js";
 
 import HomeCategoryTab from "../components/HomeCategoryTab.js";
+import TrendingNews from "../components/TrendingNews.js";
+
+var date = new Date().getDate();
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -52,6 +55,7 @@ export default function Home() {
 
   return (
     <ScreenWrapper>
+    
       <LinearGradient
         colors={["white", "#176051"]}
         start={{ x: 0, y: 0 }}
@@ -73,6 +77,7 @@ export default function Home() {
           />
           <Ionicons name="search" size={24} color="#02474C" />
         </View>
+        <TrendingNews />
         <HomeCategoryTab labels={['Covid-19', 'TIP QC', 'SciTech', 'Sport', 'Government']} onPress={(index) => {
           console.log("hello");
           setTabIndex(index);

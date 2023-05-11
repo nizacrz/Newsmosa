@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import initDB from './database';
+import initDB from '../components/DB/database';
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
