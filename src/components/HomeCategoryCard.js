@@ -1,11 +1,11 @@
-import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
-import {TouchableRipple} from 'react-native-paper';
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { TouchableRipple } from 'react-native-paper';
 
+import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from "expo-linear-gradient";
-import {Ionicons} from '@expo/vector-icons'
 
-import Kermit from '../assets/images/profile_image.jpg';
+import Kermit from '../../assets/images/profile_image.jpg';
 
 
 const HomeCategoryCard = ({image, title, date, lengthDescription, onPress, isBookmarked=false}) => {

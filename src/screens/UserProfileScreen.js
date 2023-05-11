@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
-import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Card, Paragraph, Title } from 'react-native-paper';
 
 const UserProfileScreen = () => {
   return (
@@ -15,7 +15,7 @@ const UserProfileScreen = () => {
         <MaterialIcons name="edit" size={24} color="#017e60" />
       </TouchableOpacity>
       <Image
-        source={require('../assets/images/profile_image.jpg')}
+        source={require('../../assets/images/profile_image.jpg')}
         style={styles.userImage}
       />
       <Card style={styles.card}>

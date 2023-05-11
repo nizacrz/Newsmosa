@@ -1,11 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar } from "expo-status-bar";
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
+import NavigationStack from "./src/components/NavigationStack";
+import HomeScreen from "./src/screens/HomeScreen";
 
 
-import {Provider as PaperProvider} from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 
 const Stack = createStackNavigator();
@@ -13,13 +16,13 @@ const Stack = createStackNavigator();
 export default class App extends Component {
 render() {
 return (
-<NavigationContainer>
-<Stack.Navigator>
-<Stack.Screen name="Signup" component={SignupScreen} />
-<Stack.Screen name="Login" component={LoginScreen} />
-<Stack.Screen name="Main" component={MainScreen} />
-</Stack.Navigator>
-</NavigationContainer>
+   <NavigationContainer>
+   <Stack.Navigator>
+     <Stack.Screen name="Trending" component={HomeScreen} />
+     {/* <Stack.Screen name='GetNews' component={GetNews} /> */}
+     {/* <Stack.Screen name='WebView' component={WebViewComponent} options={{ headerShown: false }} /> */}
+   </Stack.Navigator>
+ </NavigationContainer>
 );
 
 }
