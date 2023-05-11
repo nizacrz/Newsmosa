@@ -27,6 +27,26 @@ import HomeCategoryTab from "../components/HomeCategoryTab.js";
 export default function Home() {
   const [search, setSearch] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
+  const hour = new Date().getHours();
+  let greeting;
+
+  if (hour < 12) {
+    greeting = 'Good Morning';
+  } else if (hour < 18) {
+    greeting = 'Good Afternoon';
+  } else {
+    greeting = 'Good Evening';
+  }
+ const [currentDate, setCurrentDate] = useState(new Date());
+
+ const updateDate = () => {
+   setCurrentDate(new Date());
+ };
+
+ useEffect(() => {
+   const interval = setInterval(updateDate, 86400000); // 86400000 milliseconds = 1 day
+   return () => clearInterval(interval);
+ }, []);
 
   console.log("TabIndex", tabIndex);
 
@@ -40,8 +60,8 @@ export default function Home() {
       >
         <View style={styles.greeting}>
           <View style={styles.greetingHeader}>
-            <Text style={styles.greetingHeaderText}>Good Morning</Text>
-            <Text style={styles.greetingHeaderDate}>May 05, 2023</Text>
+            <Text style={styles.greetingHeaderText}>{greeting}</Text>
+            <Text style={styles.greetingHeaderDate}>{currentDate.toDateString()}</Text>
           </View>
           <Image style={styles.profile_image} source={ProfileImage} />
         </View>
