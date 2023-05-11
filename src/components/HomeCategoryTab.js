@@ -1,77 +1,53 @@
-import { View, Text, ScrollView, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-import { TouchableRipple } from "react-native-paper";
+const HomeCategoryTabs = () => {
+  const [activeTab, setActiveTab] = useState("Covid-19");
 
-const HomeCategoryTab = ({ labels, onPress, color, activeIndex }) => {
-  // 1. Receives list of labels
-  // 2. Represents them using another component within this component
-  // 3. Clicking on an item returns the index
-  // 4. There is an active initial index
+  const handleTabPress = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const renderTab = (tab) => {
+    const isActive = activeTab === tab;
+    return (
+      <TouchableOpacity
+        key={tab}
+        onPress={() => handleTabPress(tab)}
+        style={[styles.tab, isActive && styles.activeTab]}
+      >
+        <Text style={styles.tabText}>{tab}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <ScrollView
-      style={styles.category_list}
-      contentContainerStyle={styles.category_list_container_style}
-
-      horizontal
-    >
-      {labels.map((label, index) => {
-        console.log(label, index, activeIndex);
-        console.log(activeIndex === index);
-        return (
-        <HomeCategoryChip
-        key={index}
-          label={label}
-          onPress={() => {
-            console.log(index);
-            onPress(index);
-          }}
-          isActive={activeIndex === index}
-          color={color}
-        />
-      )})}
-    </ScrollView>
-  );
-};
-
-const HomeCategoryChip = ({ label, onPress, isActive = false, color }) => {
-  return (
-    <TouchableRipple
-      onPress={onPress}
-      style={[
-        styles.touchable_ripple,
-        {
-          borderColor: color ?? "red",
-          backgroundColor: isActive && (color ?? "red"),
-        },
-      ]}
-    >
-        <Text style={styles.category_list_text}>{label}</Text>
-    </TouchableRipple>
+    <View style={styles.container}>
+      {["Covid-19", "SciTech", "Sport", "Government"].map(renderTab)}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  category_list: {
-    paddingHorizontal: 5,
-  },
-  category_list_text: {
-    fontSize: 10,
-    textAlign: "center",
-  },
-  category_list_container_style: {
-    display: "flex",
+  container: {
     flexDirection: "row",
-    padding: 8,
-    textShadowColor: "gray",
-    textShadowRadius: 7,
+    backgroundColor: "transparent",
+    borderRadius: 20,
+    overflow: "hidden",
   },
-  touchable_ripple: {
-    marginRight: 5,
-    borderWidth: 1,
-    borderRadius: 9999,
-    padding: 5,
+  tab: {
+    flex: 1,
+    paddingVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  activeTab: {
+    backgroundColor: "#176051",
+  },
+  tabText: {
+    color: "white",
+    fontSize: 16,
   },
 });
 
-export default HomeCategoryTab;
+export default HomeCategoryTabs;
