@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   header_title: {
     fontWeight: "bold",
-    fontSize: 25,
+    fontSize: 20,
     color: "#ffffff",
     justifyContent: "flex-end",
     padding: 20,
