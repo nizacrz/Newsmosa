@@ -1,23 +1,29 @@
-import { View, TextInput, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 
 const SearchBar = (props) => {
   return (
     <View style={styles.container}>
       <Ionicons name="search" size={24} color="black" style={styles.icon} />
       <TextInput
+        id = 'keyword'
         style={styles.input}
         placeholder="Search"
         value={props.searchText}
         onChangeText={(text) => props.setSearchText(text)}
         onSubmitEditing={props.onSubmit}
       />
+
     </View>
   );
 };
 
 export default SearchBar;
+
+
+
+
 
 const styles = StyleSheet.create({
   container: {

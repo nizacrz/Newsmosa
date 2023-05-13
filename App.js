@@ -4,9 +4,11 @@ import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import SQLite from "react-native-sqlite-storage";
+import GetNews from "./src/components/GetNews";
 import NavigationStack from "./src/components/NavigationStack";
 import HomeScreen from "./src/screens/HomeScreen";
 import SearchScreen from "./src/screens/SearchScreen";
+
 
 import { Provider as PaperProvider } from "react-native-paper";
 
@@ -17,8 +19,8 @@ export default class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Trending" component={HomeScreen} />
-          {/* <Stack.Screen name='GetNews' component={GetNews} /> */}
+          <Stack.Screen name="Home" component={SearchScreen}  />
+           <Stack.Screen name='GetNews' component={GetNews} />
           {/* <Stack.Screen name='WebView' component={WebViewComponent} options={{ headerShown: false }} /> */}
         </Stack.Navigator>
       </NavigationContainer>

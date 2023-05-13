@@ -1,59 +1,58 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput } from "react-native";
-import ScreenWrapper from "../components/ScreenWrapper.js";
-import SearchBar from "../components/SearchBar.js";
-import { useState, useEffect } from "react";
-import { FlatList } from "react-native-gesture-handler";
+import axios from "axios";
+import react, { useState } from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import config from '../../config/config';
+import Article from "../components/Article";
+import SearchBar from "../components/SearchBar";
 
-export default function Search() {
-  const [searchText, setSearchText] = useState("");
-  const [articles, setArticles] = useState([]);
 
-  const searchNewsArticles = async () => {
-    try {
-      const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${searchText}&apiKey=YOUR_API_KEY`
-      );
-      const json = await response.json();
-      setArticles(json.articles);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const SearchScreen = () => {
+    const [searchText,setSearchText] = useState("");
+    const [articles,setArticles] = useState([]);
 
-  useEffect(() => {
-    if (searchText.length > 2) {
-      searchNewsArticles();
-    }
-  }, [searchText]);
-
-  return (
-    <ScreenWrapper>
-      <View style={styles.container}>
-        <SearchBar searchText={searchText} setSearchText={setSearchText} />
-        <FlatList
-          data={articles}
-          renderItem={({ item }) => (
-            <Article
-              urlToImage={item.urlToImage}
-              title={item.title}
-              description={item.description}
-              author={item.author}
-              publishedAt={item.publishedAt}
-              sourceName={item.source.name}
+   const searchArticles = () =>{
+       axios.get('https://newsapi.org/v2/everything?country=ph&apiKey=c23bd479af3c45eeb352216f66a50e73',{
+           params:{
+               q: searchText
+           }
+       })
+           .then( (response) =>{
+               // handle success
+               setArticles(response.data.articles);
+           })
+           .catch(function (error) {
+               // handle error
+               console.log(error);
+           })
+           .then(function () {
+               // always executed
+           });
+   }
+    return (
+        <View style={styles.container}>
+            <SearchBar searchText={searchText} setSearchText={setSearchText} onSubmit={searchArticles}/>
+            <FlatList
+                data={articles}
+                renderItem = {({item}) =>
+                    <Article
+                        urlToImage = {item.urlToImage}
+                        title = {item.title}
+                        description = {item.description}
+                        author = {item.author}
+                        publishedAt = {item.publishedAt}
+                        sourceName = {item.source.name}
+                    />}
+                keyExtractor={(item) => item.title}
             />
-          )}
-          keyExtractor={(item) => item.title}
-        />
-        <StatusBar style="auto" />
-      </View>
-    </ScreenWrapper>
-  );
+        </View>
+    )
 }
 
+export default SearchScreen;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+    }
+})

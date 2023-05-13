@@ -1,3 +1,4 @@
+import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
@@ -9,10 +10,11 @@ import {
   TextInput,
   View,
 } from "react-native";
+import News from "../components/Article.js";
 
 import { Ionicons } from "@expo/vector-icons";
-
 import { ImageBackground } from "react-native";
+
 import CardImage1 from "../../assets/images/card_image1.png";
 import CardImage2 from "../../assets/images/card_image2.png";
 import CardImage3 from "../../assets/images/card_image3.png";
@@ -20,9 +22,9 @@ import HeadImage from "../../assets/images/headImage.jpg";
 import ProfileImage from "../../assets/images/profile_image.jpg";
 import HomeCard from "../components/HomeCard.js";
 import HomeCategoryCard from "../components/HomeCategoryCard.js";
-import ScreenWrapper from "../components/ScreenWrapper.js";
-
 import HomeCategoryTab from "../components/HomeCategoryTab.js";
+import ScreenWrapper from "../components/ScreenWrapper.js";
+import SearchBar from "../components/SearchBar.js";
 import TrendingNews from "../components/TrendingNews.js";
 
 var date = new Date().getDate();
@@ -53,6 +55,8 @@ export default function Home() {
 
   console.log("TabIndex", tabIndex);
 
+
+
   return (
     <ScreenWrapper>
     
@@ -69,14 +73,8 @@ export default function Home() {
           </View>
           <Image style={styles.profile_image} source={ProfileImage} />
         </View>
-        <View style={styles.search_bar_wrapper}>
-          <TextInput
-            value={search}
-            onChangeText={setSearch}
-            style={styles.search_bar}
-          />
-          <Ionicons name="search" size={24} color="#02474C" />
-        </View>
+
+        <SearchBar/>
         <TrendingNews />
         <HomeCategoryTab labels={['Covid-19', 'TIP QC', 'SciTech', 'Sport', 'Government']} onPress={(index) => {
           console.log("hello");
