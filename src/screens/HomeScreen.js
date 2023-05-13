@@ -1,4 +1,3 @@
-import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
@@ -10,11 +9,10 @@ import {
   TextInput,
   View,
 } from "react-native";
-import News from "../components/Article.js";
 
 import { Ionicons } from "@expo/vector-icons";
-import { ImageBackground } from "react-native";
 
+import { ImageBackground } from "react-native";
 import CardImage1 from "../../assets/images/card_image1.png";
 import CardImage2 from "../../assets/images/card_image2.png";
 import CardImage3 from "../../assets/images/card_image3.png";
@@ -22,10 +20,10 @@ import HeadImage from "../../assets/images/headImage.jpg";
 import ProfileImage from "../../assets/images/profile_image.jpg";
 import HomeCard from "../components/HomeCard.js";
 import HomeCategoryCard from "../components/HomeCategoryCard.js";
-import HomeCategoryTab from "../components/HomeCategoryTab.js";
 import ScreenWrapper from "../components/ScreenWrapper.js";
-import SearchBar from "../components/SearchBar.js";
+import HomeCategoryTab from "../components/HomeCategoryTab.js";
 import TrendingNews from "../components/TrendingNews.js";
+import NewsScreen from "../screens/NewsScreen";
 
 var date = new Date().getDate();
 
@@ -37,7 +35,7 @@ export default function Home() {
 
   if (hour < 12) {
     greeting = 'Good Morning';
-  } else if (hour < 18) {
+  } else if (hour < 18 ) {
     greeting = 'Good Afternoon';
   } else {
     greeting = 'Good Evening';
@@ -53,15 +51,13 @@ export default function Home() {
    return () => clearInterval(interval);
  }, []);
 
-  console.log("TabIndex", tabIndex);
-
-
+ 
+  
 
   return (
     <ScreenWrapper>
-    
       <LinearGradient
-        colors={["white", "#176051"]}
+        colors={["lightgray", "#176051"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.container}
@@ -73,13 +69,30 @@ export default function Home() {
           </View>
           <Image style={styles.profile_image} source={ProfileImage} />
         </View>
-        <TrendingNews />
-        <HomeCategoryTab labels={['Covid-19', 'TIP QC', 'SciTech', 'Sport', 'Government']} onPress={(index) => {
+        
+        {/* Search Bar */}
+        {/* <View style={styles.search_bar_wrapper}>
+          <TextInput
+            value={search}
+            onChangeText={setSearch}
+            style={styles.search_bar}
+          />
+          <Ionicons name="search" size={24} color="#02474C" />
+        </View> */}
+        
+        
+        
+        {/* <HomeCategoryTab labels={['Covid-19', 'TIP QC', 'SciTech', 'Sport', 'Government']} onPress={(index) => {
           console.log("hello");
           setTabIndex(index);
-        }} color="#017e60" activeIndex={tabIndex} />
+        }} color="#017e60" activeIndex={tabIndex} /> */}
 
+        <HomeCategoryTab navigation={this.props.navigation} />
+        
         <ScrollView>
+        <TrendingNews navigation={this.props.navigation} />
+
+        <NewsScreen /> 
           <HomeCard
             text="Apply for our scholarship grants"
             source={HeadImage}
