@@ -3,21 +3,20 @@ import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
 const SearchBar = (props) => {
-  return (
+  return(
     <View style={styles.container}>
       <Ionicons name="search" size={24} color="black" style={styles.icon} />
-      <TextInput
-        id = 'keyword'
-        style={styles.input}
-        placeholder="Search"
-        value={props.searchText}
-        onChangeText={(text) => props.setSearchText(text)}
-        onSubmitEditing={props.onSubmit}
-      />
-
+        <TextInput
+            
+            placeholder="Search"
+            style={styles.input}
+            value={props.searchText}
+            onChangeText={(text)=>props.setSearchText(text)}
+            onSubmitEditing={props.onSubmit}
+        />
     </View>
-  );
-};
+)
+}
 
 export default SearchBar;
 

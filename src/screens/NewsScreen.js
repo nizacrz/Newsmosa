@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {RefreshControl,View,StyleSheet,Text,SafeAreaView, FlatList} from "react-native";
-import Article from "../components/Article";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Dimensions, FlatList, RefreshControl, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import config from "../../config/config";
+import Article from "../components/Article";
 
 
 const NewsScreen = () => {
@@ -62,5 +62,6 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor: 'transparent',
+        width: Dimensions.get('window').width -30,
     }
 })

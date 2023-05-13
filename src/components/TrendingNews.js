@@ -1,7 +1,7 @@
+
 import React, { Component } from 'react';
 import { ActivityIndicator, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import config from '../../config/config';
-import Search from '../components/SearchBar';
 
 class TrendingNews extends Component {
   state = {
@@ -10,7 +10,7 @@ class TrendingNews extends Component {
 
   componentDidMount() {
     fetch(
-      `https://newsapi.org/v2/top-headlines?country=PH&apiKey=${config.API_KEY}`,
+      `https://newsapi.org/v2/top-headlines?country=ph&apiKey=${config.API_KEY}`,
     )
       .then(res => res.json())
       .then(response => {
@@ -21,8 +21,8 @@ class TrendingNews extends Component {
       .catch(error => {
         console.log(error);
       });
-   
   }
+
   render() {
     return (
       <View>

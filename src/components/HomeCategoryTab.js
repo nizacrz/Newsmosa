@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import React, { Component } from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 const categories = [
   'Entertainment',
@@ -30,9 +30,10 @@ class HomeCategoryTab extends Component {
                   padding: 10,
                   borderWidth: 1,
                   borderColor: 'black',
-                  fontSize: 19,
-                  margin: 10,
+                  fontSize: 15,
+                  margin: 3,
                   borderRadius: 10,
+
                 }}>
                 {category}
               </Text>

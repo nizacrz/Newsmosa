@@ -20,14 +20,15 @@ import HeadImage from "../../assets/images/headImage.jpg";
 import ProfileImage from "../../assets/images/profile_image.jpg";
 import HomeCard from "../components/HomeCard.js";
 import HomeCategoryCard from "../components/HomeCategoryCard.js";
-import ScreenWrapper from "../components/ScreenWrapper.js";
 import HomeCategoryTab from "../components/HomeCategoryTab.js";
+import ScreenWrapper from "../components/ScreenWrapper.js";
 import TrendingNews from "../components/TrendingNews.js";
 import NewsScreen from "../screens/NewsScreen";
 
+
 var date = new Date().getDate();
 
-export default function Home() {
+const HomeScreen = () => {
   const [search, setSearch] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
   const hour = new Date().getHours();
@@ -87,13 +88,13 @@ export default function Home() {
           setTabIndex(index);
         }} color="#017e60" activeIndex={tabIndex} /> */}
 
-        <HomeCategoryTab navigation={this.props.navigation} />
+        <HomeCategoryTab  />
         
         <ScrollView>
-        <TrendingNews navigation={this.props.navigation} />
+        <TrendingNews  />
 
         <NewsScreen /> 
-          <HomeCard
+          {/* <HomeCard
             text="Apply for our scholarship grants"
             source={HeadImage}
             onPress={() => {}}
@@ -119,13 +120,16 @@ export default function Home() {
             date={"May 8, 2023"}
             lengthDescription="10 minutes"
             onPress={() => {}}
-          />
+          /> */}
         </ScrollView>
-        <StatusBar style="auto" />
+        
       </LinearGradient>
     </ScreenWrapper>
   );
-}
+    }
+
+export default HomeScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

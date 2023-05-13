@@ -5,16 +5,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Provider as PaperProvider } from "react-native-paper";
 import SQLite from "react-native-sqlite-storage";
 import GetNews from "./src/components/GetNews";
-import NavigationStack from "./src/components/NavigationStack";
+import WebView from "./src/components/WebView";
 import BookmarkScreen from "./src/screens/BookmarkScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import SearchScreen from "./src/screens/SearchScreen";
-
-
-
-import { Provider as PaperProvider } from "react-native-paper";
 import UserProfileScreen from './src/screens/UserProfileScreen';
 
 const Stack = createStackNavigator();
@@ -39,8 +36,8 @@ export default class App extends Component {
                 <Tab.Screen name="User Profile" component={UserProfileScreen} options={{
                     tabBarIcon: () =><Ionicons name="person" size={24} color="black" />
                 }}/>
-                
             </Tab.Navigator>
+            <StatusBar style="auto" />
       </NavigationContainer>
     );
   }

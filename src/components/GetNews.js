@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
-   ActivityIndicator,
-   Dimensions,
-   Image,
-   ScrollView,
-   Text,
-   TouchableOpacity,
-   View,
+  ActivityIndicator,
+  Dimensions,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import config from '../../config/config';
 

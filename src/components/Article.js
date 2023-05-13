@@ -10,34 +10,43 @@ const Article = (props) => {
     }
 
     return(
-        <Pressable style={styles.container} onPress={goToSource}>
+        // This code displays a news article. It includes the article title, description, image, author, date, and source.
+
+<Pressable style={styles.container} onPress={goToSource}>
             {/* image */}
-            <Image source={{
-                uri: props.urlToImage
-            }}
-            style={styles.image}
+            <Image
+                source={{
+                    uri: props.urlToImage
+                }}
+                style={styles.image}
             />
 
-            <View style={{padding: 20}}>
+            <View style={{padding: 20, borderRadius:3, borderColor:"lightgray"}}>
+                {/* title */}
+                <Text style={styles.title}>{props.title}</Text>
 
+                {/* description */}
+                <Text style={styles.description} numberOfLines={3}>
+                    {props.description}
+                </Text>
 
-        {/*    title */}
-            <Text style={styles.title}>{props.title}</Text>
+                <View style={styles.data}>
+                    <Text style={styles.heading}>
+                        by: <Text style={styles.author}>{props.author}</Text>
+                    </Text>
+                    </View>
+                    <View style={{marginTop: 10}}>
+                    <Text style={styles.date}>
+                        {moment(props.publishedAt).format("MMM Do YY")}
+                    </Text>
+                </View>
 
-        {/*    description */}
-            <Text style={styles.description} numberOfLines={3}>
-                {props.description}
-            </Text>
-
-            <View style={styles.data}>
-                <Text style={styles.heading}>by: <Text style={styles.author}>{props.author}</Text></Text>
-                <Text style={styles.date}>{moment(props.publishedAt).format("MMM Do YY") }</Text>
-            </View>
-
-        {/*     source */}
-            <View style={{marginTop: 10}}>
-                <Text>source: <Text style={styles.source}>{props.sourceName}</Text></Text>
-            </View>
+                {/* source
+                <View style={{marginTop: 10}}>
+                    <Text>
+                        source: <Text style={styles.source}>{props.sourceName}</Text>
+                    </Text>
+                </View> */}
             </View>
         </Pressable>
     )
