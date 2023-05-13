@@ -1,3 +1,5 @@
+import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
@@ -6,23 +8,39 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import SQLite from "react-native-sqlite-storage";
 import GetNews from "./src/components/GetNews";
 import NavigationStack from "./src/components/NavigationStack";
+import BookmarkScreen from "./src/screens/BookmarkScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 
 
+
 import { Provider as PaperProvider } from "react-native-paper";
+import UserProfileScreen from './src/screens/UserProfileScreen';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={SearchScreen}  />
-           <Stack.Screen name='GetNews' component={GetNews} />
-          {/* <Stack.Screen name='WebView' component={WebViewComponent} options={{ headerShown: false }} /> */}
-        </Stack.Navigator>
+         <Tab.Navigator screenOptions={{
+                tabBarActiveTintColor: "#176051"
+            }}>
+                <Tab.Screen name="Home" component={HomeScreen} options={{
+                    tabBarIcon: () =><Ionicons name="home" size={24} color="black" />
+                }}/>
+                <Tab.Screen name="Search" component={SearchScreen} options={{
+                    tabBarIcon: () =><Ionicons name="search" size={24} color="black" />
+                }}/>
+                <Tab.Screen name="Bookmark" component={BookmarkScreen} options={{
+                    tabBarIcon: () =><Ionicons name="bookmark" size={24} color="black" />
+                }}/>
+                <Tab.Screen name="User Profile" component={UserProfileScreen} options={{
+                    tabBarIcon: () =><Ionicons name="person" size={24} color="black" />
+                }}/>
+                
+            </Tab.Navigator>
       </NavigationContainer>
     );
   }

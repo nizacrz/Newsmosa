@@ -73,8 +73,6 @@ export default function Home() {
           </View>
           <Image style={styles.profile_image} source={ProfileImage} />
         </View>
-
-        <SearchBar/>
         <TrendingNews />
         <HomeCategoryTab labels={['Covid-19', 'TIP QC', 'SciTech', 'Sport', 'Government']} onPress={(index) => {
           console.log("hello");
