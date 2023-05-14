@@ -1,8 +1,16 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Button, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Card, Paragraph, Title } from 'react-native-paper';
+import firebase from '../components/database/firebase';
+
+signOut = () => {
+  firebase.auth().signOut().then(() => {
+    this.props.navigation.navigate('Login')
+  })
+  .catch(error => this.setState({ errorMessage: error.message }))
+}  
 
 const UserProfileScreen = () => {
   return (
@@ -20,17 +28,8 @@ const UserProfileScreen = () => {
       />
       <Card style={styles.card}>
         <Card.Content>
-          <Title>Juan Dela Cruz</Title>
-          <Paragraph style={styles.email}>juandelacruz@gmail.com</Paragraph>
-          <Paragraph style={styles.catchphrase}>What's the catch today?</Paragraph>
-          <Paragraph style={styles.gender}>
-            {'    '}Age{'       '}Gender{'      '}Number
-          </Paragraph>
-           <Paragraph>     ??          ??               ??
-          </Paragraph>
-          <Paragraph>
-          {'  '}
-          </Paragraph>
+          <Title>firebase.auth().currentUser.displayName</Title>
+          <Paragraph style={styles.email}>firebase.auth().currentUser.email</Paragraph>
           <TouchableOpacity>
             <Paragraph style={styles.link}>
               View Saved Stories
@@ -38,9 +37,11 @@ const UserProfileScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity>
-            <Paragraph style={styles.link}>
-              Logout
-            </Paragraph>
+          <Button
+          color="#3740FE"
+          title="Logout"
+          onPress={() => this.signOut()}
+        />
           </TouchableOpacity>
           
         </Card.Content>

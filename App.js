@@ -11,16 +11,16 @@ import GetNews from "./src/components/GetNews";
 import WebView from "./src/components/WebView";
 import BookmarkScreen from "./src/screens/BookmarkScreen";
 import HomeScreen from "./src/screens/HomeScreen";
+import LoginScreen from './src/screens/LoginScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
 import SearchScreen from "./src/screens/SearchScreen";
 import UserProfileScreen from './src/screens/UserProfileScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-export default class App extends Component {
-  render() {
-    return (
-      <NavigationContainer>
+function HomeTabs () {
+  return (
          <Tab.Navigator screenOptions={{
                 tabBarActiveTintColor: "#176051"
             }}>
@@ -37,11 +37,24 @@ export default class App extends Component {
                     tabBarIcon: () =><Ionicons name="person" size={24} color="black" />
                 }}/>
             </Tab.Navigator>
-            <StatusBar style="auto" />
-      </NavigationContainer>
+  );
+}
+
+
+function App () {
+{
+    return (
+      <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+        {/* <Stack.Screen name="Register" component={RegisterScreen} /> */}
+        <Stack.Screen name="Home" component={HomeTabs} />
+      </Stack.Navigator>
+    </NavigationContainer>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -84,3 +97,4 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+export default App;
