@@ -15,6 +15,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import SearchScreen from "./src/screens/SearchScreen";
 import UserProfileScreen from './src/screens/UserProfileScreen';
+import { authentication } from "./src/components/database/firebase";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
