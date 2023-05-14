@@ -1,7 +1,9 @@
-// components/signup.js
+
+
 import React, { Component } from 'react';
 import { ActivityIndicator, Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import firebase from '../components/database/firebase';
+
 
 export default class RegisterScreen extends Component {
   
@@ -14,11 +16,13 @@ export default class RegisterScreen extends Component {
       isLoading: false
     }
   }
+
   updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;
     this.setState(state);
   }
+
   registerUser = () => {
     if(this.state.email === '' && this.state.password === '') {
       Alert.alert('Enter details to signup!')
@@ -45,6 +49,7 @@ export default class RegisterScreen extends Component {
       .catch(error => this.setState({ errorMessage: error.message }))      
     }
   }
+
   render() {
     if(this.state.isLoading){
       return(
@@ -80,6 +85,7 @@ export default class RegisterScreen extends Component {
           title="Signup"
           onPress={() => this.registerUser()}
         />
+
         <Text 
           style={styles.loginText}
           onPress={() => this.props.navigation.navigate('Login')}>
@@ -89,6 +95,7 @@ export default class RegisterScreen extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
