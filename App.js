@@ -19,6 +19,7 @@ import UserProfileScreen from './src/screens/UserProfileScreen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+//Seperate the Tabs from Login and Signup
 function HomeTabs () {
   return (
          <Tab.Navigator screenOptions={{
