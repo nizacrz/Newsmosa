@@ -1,39 +1,32 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { Component, useState } from "react";
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+
 import {
-  ActivityIndicator,
-  Alert,
-  Button,
+  Image,
   StyleSheet,
   Text,
   TextInput,
-  View,
-  Image,
   TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { authentication } from "../components/database/firebase";
+import { firebase } from "../components/database/firebase";
+
 
 const LoginScreen = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+    const navigation = useNavigation();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const signIn = () => {
-    if (email === "" && password === "") {
-      Alert.alert("Enter details to signin!");
-    } else {
-      signInWithEmailAndPassword(authentication, email, password).then(
-        (res) => {
-          setIsSignedIn(true);
-          console.log("User signed in successfully!");
-          this.props.navigation.navigate("Login");
+    loginUser = async (email, password) => {
+        try {
+          await firebase.signInWithEmailAndPassword(email, password);
+        } catch (error) {
+          alert(error.message)
         }
-      );
-      console.log();
+
     }
-  };
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -48,33 +41,35 @@ const LoginScreen = () => {
         <TextInput
           placeholder="Email"
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(email) => setEmail(email)}
           style={styles.input}
           autoCapitalize="none"
+          autoCorrect = {false}
         />
         <TextInput
           placeholder="Password"
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(password) => setPassword(password)}
           style={styles.input}
           secureTextEntry={true}
           autoCapitalize="none"
         />
-        <TouchableOpacity style={styles.button} onPress={signIn}>
+        <TouchableOpacity style={styles.button} onPress={() => loginUser (email,password)}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
         <View style={styles.registerTextContainer}>
           <Text style={styles.registerText}>Don't have an account?</Text>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Register")}
+            onPress={() => navigation.navigate('Register')}
           >
             <Text style={styles.registerLink}> Register here</Text>
           </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
-  );
-};
+  )
+  }
+  export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -139,4 +134,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+

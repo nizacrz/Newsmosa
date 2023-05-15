@@ -1,131 +1,110 @@
+import React, { useState } from 'react'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { firebase } from '../components/database/firebase'
 
+const Registration = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
 
-import React, { Component } from 'react';
-import { ActivityIndicator, Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import firebase from '../components/database/firebase';
-
-
-export default class RegisterScreen extends Component {
-  
-  constructor() {
-    super();
-    this.state = { 
-      displayName: '',
-      email: '', 
-      password: '',
-      isLoading: false
-    }
-  }
-
-  updateInputVal = (val, prop) => {
-    const state = this.state;
-    state[prop] = val;
-    this.setState(state);
-  }
-
-  registerUser = () => {
-    if(this.state.email === '' && this.state.password === '') {
-      Alert.alert('Enter details to signup!')
-    } else {
-      this.setState({
-        isLoading: true,
-      })
-      firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then((res) => {
-        res.user.updateProfile({
-          displayName: this.state.displayName
+    registerUser = async (email,password, firstName, lastName) => {
+        await firebase.auth().createUserWithEmailAndPassword(email,password)
+        .then(() => {
+          firebase.auth().currentUser.sendEmailVerification({
+            handleCodeInApp: true,
+            url: 'https://newsmosareact.firebaseapp.com',
+           })
+          .then(() => {
+                alert("Email sent")
+            }).catch((error) => {
+                alert(error)
+            })
+            .then(() => {
+              firebase.firestore().collection("users")
+              .doc(firebase.auth().currentUser.uid)
+              .set({
+                  firstName,
+                  lastName,
+                  email,
+              })
+            })
+            .catch((error) => {
+              alert(error)
+          })
         })
-        console.log('User registered successfully!')
-        this.setState({
-          isLoading: false,
-          displayName: '',
-          email: '', 
-          password: ''
+        .catch((error) => {
+            alert(error)
         })
-        this.props.navigation.navigate('Login')
-      })
-      .catch(error => this.setState({ errorMessage: error.message }))      
     }
-  }
 
-  render() {
-    if(this.state.isLoading){
-      return(
-        <View style={styles.preloader}>
-          <ActivityIndicator size="large" color="#9E9E9E"/>
+
+  return (
+    <View style={styles.container}>
+        <Text style={{fontWeight:'bold', fontSize:23,}}>
+          Register Here!
+        </Text>
+        <View style={{marginTop:40}}>
+          <TextInput style={styles.textInput} 
+              placeholder="First Name" 
+              onChangeText={(firstName) => setFirstName(firstName)}
+              autoCorrect={false}
+          />
+          <TextInput style={styles.textInput} 
+            placeholder="Last Name" 
+            onChangeText={(lastName) => setLastName(lastName)}
+            autoCorrect={false}
+          />
+          <TextInput style={styles.textInput} 
+            placeholder="Email" 
+            onChangeText={(email) => setEmail(email)}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
+          />
+          <TextInput style={styles.textInput} 
+            placeholder="Password" 
+            onChangeText={(password)=> setPassword(password)}
+            autoCorrect={false}
+            autoCapitalize="none"
+            secureTextEntry={true}
+          />
         </View>
-      )
-    }    
-    return (
-      <View style={styles.container}>  
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Name"
-          value={this.state.displayName}
-          onChangeText={(val) => this.updateInputVal(val, 'displayName')}
-        />      
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Email"
-          value={this.state.email}
-          onChangeText={(val) => this.updateInputVal(val, 'email')}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Password"
-          value={this.state.password}
-          onChangeText={(val) => this.updateInputVal(val, 'password')}
-          maxLength={15}
-          secureTextEntry={true}
-        />   
-        <Button
-          color="#3740FE"
-          title="Signup"
-          onPress={() => this.registerUser()}
-        />
-
-        <Text 
-          style={styles.loginText}
-          onPress={() => this.props.navigation.navigate('Login')}>
-          Already Registered? Click here to login
-        </Text>                          
+        <TouchableOpacity
+            onPress={()=>registerUser(email,password, firstName, lastName)}
+            style={styles.button}
+        >
+          <Text style={{fontWeight:'bold', fontSize:22}}>Register</Text>
+        </TouchableOpacity>
       </View>
-    );
-  }
+  )
 }
+
+export default Registration
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    padding: 35,
-    backgroundColor: '#fff'
+    flex:1,  
+    alignItems:'center',
+    marginTop:80,
   },
-  inputStyle: {
-    width: '100%',
-    marginBottom: 15,
-    paddingBottom: 15,
-    alignSelf: "center",
-    borderColor: "#ccc",
-    borderBottomWidth: 1
+  textInput: {
+    paddingTop: 20,
+    paddingBottom:10,
+    width:400,
+    fontSize: 20,
+    borderBottomColor: '#000',
+    borderBottomWidth: 1,
+    marginBottom: 10,
+    textAlign: 'center',
   },
-  loginText: {
-    color: '#3740FE',
-    marginTop: 25,
-    textAlign: 'center'
-  },
-  preloader: {
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff'
+  button: {
+    marginTop:50,
+    height:70,
+    width:250,
+    backgroundColor:'#026efd',
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius:50,
   }
 });

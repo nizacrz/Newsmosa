@@ -3,20 +3,21 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import SQLite from "react-native-sqlite-storage";
-import GetNews from "./src/components/GetNews";
-import WebView from "./src/components/WebView";
+import { firebase } from './src/components/database/firebase';
+
+// Screen Components
+import Header from './src/components/Header';
 import BookmarkScreen from "./src/screens/BookmarkScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import SearchScreen from "./src/screens/SearchScreen";
 import UserProfileScreen from './src/screens/UserProfileScreen';
-import { authentication } from "./src/components/database/firebase";
 
+// Constant Vars
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -42,18 +43,83 @@ function HomeTabs () {
   );
 }
 
+function App  () {
 
-function App () {
-{
+  const [initializing, setInitializing] = useState(true);
+  const [user , setUser] = useState();
+
+// Handling user state changes
+function onAuthStateChanged(user){
+  setUser(user);
+  if (initializing) setInitializing(false);
+}
+
+useEffect(() => {
+  const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+  return subscriber; // unsubscribe on unmount
+}, []);
+
+if (initializing) return null;
+  if(!user) {
     return (
-      <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomeTabs} />
+        <Stack.Screen 
+        name = "Login"
+        component={LoginScreen}
+        options={{
+          headerTitle: () => <Header name = "Login" />,
+          
+          headerStyle: {
+            height: 150,
+            borderBottomLeftRadius: 50,
+            borderBottomRightRadius: 50,
+            backgroundColor: "#176051",
+            shadowColor: "#000",
+            elevation: 25
+          }         
+        }}
+        />
+        <Stack.Screen 
+        name = "Register"
+        component={RegisterScreen}
+        options={{
+          headerTitle: () => <Header name = "Register" />,
+          
+          headerStyle: {
+            height: 150,
+            borderBottomLeftRadius: 50,
+            borderBottomRightRadius: 50,
+            backgroundColor: "#176051",
+            shadowColor: "#000",
+            elevation: 25
+          }         
+        }}
+        />
       </Stack.Navigator>
-    </NavigationContainer>
     );
+  }
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        name = "Home"
+        component={HomeTabs}
+        options={{
+          headerTitle: () => <Header name = "Home" />,
+          
+          headerStyle: {
+            height: 150,
+            borderBottomLeftRadius: 50,
+            borderBottomRightRadius: 50,
+            backgroundColor: "#176051",
+            shadowColor: "#000",
+            elevation: 25
+          }         
+        }}
+        />
+    </Stack.Navigator>
+  )
+
+{
   }
 }
 
@@ -99,4 +165,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-export default App;
+export default () => {
+  return (
+    <NavigationContainer>
+    <App />
+    </NavigationContainer>
+  )
+}
