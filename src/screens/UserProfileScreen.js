@@ -1,9 +1,9 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
-import { Button, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Button, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Card, Paragraph, Title } from 'react-native-paper';
-import firebase from '../components/database/firebase';
+import { firebase } from '../components/database/firebase';
 
 signOut = () => {
   firebase.auth().signOut().then(() => {
@@ -13,42 +13,63 @@ signOut = () => {
 }  
 
 const UserProfileScreen = () => {
+  const [name, setName] = useState([]);
+
+  const changePassword = () => {
+    firebase.auth().sendPasswordResetEmail(firebase.auth().currentUser.email)
+    .then(() => {
+      alert('Password reset email sent!')
+    })
+    .catch(error => {
+      alert(error)
+    })
+  }
+
+  useEffect(() => {
+    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get()
+    .then((snapshot) =>{
+      if(snapshot.exists){
+          setName(snapshot.data())
+      }
+      else {
+        console.log('does not exist')
+      }
+  })
+  }, [])
+
+
   return (
     <LinearGradient
       colors={['white', '#176051']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}>
-      <TouchableOpacity style={styles.editIcon}>
-        <MaterialIcons name="edit" size={24} color="#017e60" />
+       <SafeAreaView style={styles.container}>
+      
+      <Text style={{fontSize:20, fontWeight:'bold'}}>
+        Hello, {name.firstName}
+      </Text>
+      <TouchableOpacity
+          onPress={()=>{
+            changePassword()
+        }}
+          style={styles.button}
+      >
+        <Text style={{fontWeight:'bold', fontSize:22}}>Change Password</Text>
       </TouchableOpacity>
-      <Image
-        source={require('../../assets/images/profile_image.jpg')}
-        style={styles.userImage}
-      />
-      <Card style={styles.card}>
-        <Card.Content>
-          <Title>firebase.auth().currentUser.displayName</Title>
-          <Paragraph style={styles.email}>firebase.auth().currentUser.email</Paragraph>
-          <TouchableOpacity>
-            <Paragraph style={styles.link}>
-              View Saved Stories
-            </Paragraph>
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-          <Button
-          color="#3740FE"
-          title="Logout"
-          onPress={() => firebase.auth().signOut()}
-        />
-          </TouchableOpacity>
-          
-        </Card.Content>
-      </Card>
-    </LinearGradient>
-  );
-};
+      <TouchableOpacity
+          onPress={()=>{
+            firebase.auth().signOut();
+        }}
+          style={styles.button}
+      >
+        <Text style={{fontWeight:'bold', fontSize:22}}>Sign Out</Text>
+      </TouchableOpacity>
+    
+  </SafeAreaView>
+  </LinearGradient>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
