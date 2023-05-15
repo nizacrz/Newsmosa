@@ -1,25 +1,20 @@
 import { Ionicons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { firebase } from "./src/components/database/firebase";
-
-
-
 import Header from "./src/components/Header";
 import HomeScreen from "./src/screens/HomeScreen";
-import LoginScreen from './src/screens/LoginScreen';
-import RegisterScreen from './src/screens/RegisterScreen';
+import LoginScreen from "./src/screens/LoginScreen";
+import RegisterScreen from "./src/screens/RegisterScreen";
 import SearchScreen from "./src/screens/SearchScreen";
-import UserProfileScreen from './src/screens/UserProfileScreen';
+import UserProfileScreen from "./src/screens/UserProfileScreen";
 
 import BookmarkScreen from "./src/screens/BookmarkScreen";
 
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
 
 function App() {
   const [initializing, setInitializing] = useState(true);
@@ -32,7 +27,7 @@ function App() {
   }
   useEffect(() => {
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; 
+    return subscriber;
   }, []);
 
   if (initializing) return null;
@@ -40,57 +35,80 @@ function App() {
   if (!user) {
     return (
       <Stack.Navigator>
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{ 
-          headerTitle: () => <Header name="Login" />,
-           headerStyle:{
-            height:150,
-            borderBottomLeftRadius:50,
-            borderBottomRightRadius:50,
-            backgroundColor:'#00e4d0',
-            shadowColor:'#000',
-            elevation:25
-           }
-         }}
-      />
-      <Stack.Screen
-        name="Registration"
-        component={RegisterScreen}
-        options={{ 
-          headerTitle: () => <Header name="Sign Up" />,
-           headerStyle:{
-            height:100,
-            borderBottomLeftRadius:50,
-            borderBottomRightRadius:50,
-            backgroundColor:'#00e4d0',
-            shadowColor:'#000',
-            elevation:25
-           }
-         }}
-      />
-    </Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerTitle: () => <Header name="Login" />,
+            headerStyle: {
+              backgroundColor: "#f8f4f4",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+            },
+            headerTitleStyle: {
+              fontSize: 10,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Registration"
+          component={RegisterScreen}
+          options={{
+            headerTitle: () => <Header name="Sign Up" />,
+            headerStyle: {
+              backgroundColor: "#f8f4f4",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+            },
+          }}
+        />
+      </Stack.Navigator>
     );
   }
 
   return (
-    <Tab.Navigator screenOptions={{
-      tabBarActiveTintColor: "#176051"
-  }}>
-      <Tab.Screen name="Home" component={HomeScreen} options={{
-          tabBarIcon: () =><Ionicons name="home" size={24} color="black" />
-      }}/>
-      <Tab.Screen name="Search" component={SearchScreen} options={{
-          tabBarIcon: () =><Ionicons name="search" size={24} color="black" />
-      }}/>
-      <Tab.Screen name="Bookmark" component={BookmarkScreen} options={{
-          tabBarIcon: () =><Ionicons name="bookmark" size={24} color="black" />
-      }}/>
-      <Tab.Screen name="User Profile" component={UserProfileScreen} options={{
-          tabBarIcon: () =><Ionicons name="person" size={24} color="black" />
-      }}/>
-  </Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: "#176051",
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: () => <Ionicons name="home" size={24} color="black" />,
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          tabBarIcon: () => <Ionicons name="search" size={24} color="black" />,
+        }}
+      />
+      <Tab.Screen
+        name="Bookmark"
+        component={BookmarkScreen}
+        options={{
+          tabBarIcon: () => (
+            <Ionicons name="bookmark" size={24} color="black" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="User Profile"
+        component={UserProfileScreen}
+        options={{
+          tabBarIcon: () => <Ionicons name="person" size={24} color="black" />,
+        }}
+      />
+    </Tab.Navigator>
   );
 }
 
@@ -99,5 +117,5 @@ export default () => {
     <NavigationContainer>
       <App />
     </NavigationContainer>
-  )
-}
+  );
+};
