@@ -49,7 +49,7 @@ function App() {
               elevation: 5,
             },
             headerTitleStyle: {
-              fontSize: 10,
+              fontSize: 16,
             },
           }}
         />
@@ -65,6 +65,9 @@ function App() {
               shadowOpacity: 0.25,
               shadowRadius: 3.84,
               elevation: 5,
+            },
+            headerTitleStyle: {
+              fontSize: 10,
             },
           }}
         />

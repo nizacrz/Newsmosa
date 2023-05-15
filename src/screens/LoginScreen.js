@@ -75,7 +75,7 @@ const Login = () => {
         <Text style={styles.linkText}>Sign up here</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={forgetPassword} style={styles.link}>
-        <Text style={styles.linkText}>Forgot Password?</Text>
+        <Text style={styles.linkForgotText}>Forgot Password?</Text>
       </TouchableOpacity>
     </View>
   );
@@ -104,9 +104,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 35,
+    marginBottom: 10,
     height: 60,
     width: 300,
-    backgroundColor: "#026efd",
+    backgroundColor: "#02474C",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
@@ -135,6 +136,12 @@ const styles = StyleSheet.create({
     color: "#009688",
     fontSize: 16,
     marginLeft: 5,
+  },
+  linkForgotText: {
+    color: "#009688",
+    fontSize: 16,
+    marginLeft: 5,
+    marginTop: -15,
   },
 });
 
