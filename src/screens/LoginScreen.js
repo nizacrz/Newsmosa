@@ -1,137 +1,107 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState } from "react";
-
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { firebase } from "../components/database/firebase";
+import { useNavigation } from '@react-navigation/native'
+import React, { useState } from 'react'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { firebase } from "../components/database/firebase"
 
 
-const LoginScreen = () => {
-    const navigation = useNavigation();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    loginUser = async (email, password) => {
-        try {
-          await firebase.signInWithEmailAndPassword(email, password);
-        } catch (error) {
-          alert(error.message)
+const Login = () => {
+    const navigation = useNavigation()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    loginUser = async (email,password) => {
+        try{
+            await firebase.auth().signInWithEmailAndPassword(email,password)
+        } catch (error){
+          alert(error)
         }
-
     }
 
+    // forget password
+    const forgetPassword = () => {
+        firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+            alert('Password reset email sent!')
+        })
+        .catch(error => {
+            alert(error)
+        })
+    }
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/Newsmosa_icon.png")}
-        />
-      </View>
-      <Text style={styles.logoText}>Welcome back</Text>
-      <View style={styles.formContainer}>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={(email) => setEmail(email)}
-          style={styles.input}
-          autoCapitalize="none"
-          autoCorrect = {false}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={(password) => setPassword(password)}
-          style={styles.input}
-          secureTextEntry={true}
-          autoCapitalize="none"
-        />
-        <TouchableOpacity style={styles.button} onPress={() => loginUser (email,password)}>
-          <Text style={styles.buttonText}>Sign In</Text>
-        </TouchableOpacity>
-        <View style={styles.registerTextContainer}>
-          <Text style={styles.registerText}>Don't have an account?</Text>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Register')}
-          >
-            <Text style={styles.registerLink}> Register here</Text>
-          </TouchableOpacity>
+    return (
+      <View style={styles.container}>
+        <Text style={{fontWeight:'bold', fontSize:26,}}>
+          Login
+        </Text>
+        <View style={{marginTop:40}}>
+          <TextInput style={styles.textInput} 
+            placeholder="Email" 
+            onChangeText={(email) => setEmail(email)}
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+          <TextInput style={styles.textInput} 
+            placeholder="Password" 
+            onChangeText={(password)=> setPassword(password)}
+            autoCorrect={false}
+            autoCapitalize="none"
+            secureTextEntry={true}
+          />
         </View>
+        <TouchableOpacity
+            onPress={()=>loginUser(email,password)}
+            style={styles.button}
+        >
+          <Text style={{fontWeight:'bold', fontSize:22}}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=>navigation.navigate('Registration')}
+          style={{marginTop:20,}}
+        >
+          <Text style={{fontSize:16, fontWeight:'bold'}}>
+            Don't have an account? Sign up here
+          </Text>
+          
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=>{forgetPassword()}}
+          style={{marginTop:20,}}
+        >
+          <Text style={{fontSize:16, fontWeight:'bold'}}>
+            Forget Password?
+          </Text>
+          
+        </TouchableOpacity>
       </View>
-    </SafeAreaView>
-  )
-  }
-  export default LoginScreen;
+    )
+}
+
+export default Login
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    flex:1,  
+    alignItems:'center',
+    marginTop:100,
   },
-  logoContainer: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  logo: {
-    width: 400,
-    height: 400,
-  },
-  formContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "80%",
-  },
-  input: {
-    width: "100%",
-    marginBottom: 15,
-    paddingBottom: 15,
-    alignSelf: "center",
-    borderColor: "#ccc",
+  textInput: {
+    paddingTop: 20,
+    paddingBottom:10,
+    width:400,
+    fontSize: 20,
+    borderBottomColor: '#000',
     borderBottomWidth: 1,
+    marginBottom: 10,
+    textAlign: 'center',
   },
   button: {
-    backgroundColor: "#009688",
-    padding: 10,
-    borderRadius: 10,
-    marginTop: 30,
-    width: "100%",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  registerTextContainer: {
-    flexDirection: "row",
-    marginTop: 20,
-  },
-  registerText: {
-    color: "#000",
-    fontSize: 16,
-  },
-  registerLink: {
-    color: "#009688",
-    fontSize: 16,
-  },
-  logoText: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "black",
-    marginTop: 60,
-    textAlign: "center",
-    textTransform: "uppercase",
-  },
+    marginTop:50,
+    height:70,
+    width:250,
+    backgroundColor:'#026efd',
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius:50,
+  }
 });
-
-

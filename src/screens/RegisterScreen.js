@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { firebase } from '../components/database/firebase'
+import { firebase } from "../components/database/firebase"
+
 
 const Registration = () => {
   const [email, setEmail] = useState('')

@@ -40,7 +40,7 @@ const UserProfileScreen = () => {
           <Button
           color="#3740FE"
           title="Logout"
-          onPress={() => this.signOut()}
+          onPress={() => firebase.auth().signOut()}
         />
           </TouchableOpacity>
           

@@ -1,8 +1,8 @@
 // database/firebaseDb.js
 
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBjF5ksP_2B4BtQC2IaBoKlo-wbp_Fym54",
@@ -15,7 +15,8 @@ const firebaseConfig = {
 };
 
 if (!firebase.apps.length) {
-  firebase.initializeApplication(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
 }
 
 export { firebase };
+
