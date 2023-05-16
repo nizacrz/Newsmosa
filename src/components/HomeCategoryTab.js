@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { Component } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -11,6 +12,7 @@ const categories = [
 ];
 
 class HomeCategoryTab extends Component {
+  
   state = {};
   render() {
     const { navigation } = this.props;

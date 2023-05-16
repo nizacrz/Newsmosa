@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
-import { firebase } from "./src/components/database/firebase";
 import Header from "./src/components/Header";
+import { firebase } from "./src/components/database/firebase";
 import HomeScreen from "./src/screens/HomeScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
@@ -58,6 +58,24 @@ function App() {
           component={RegisterScreen}
           options={{
             headerTitle: () => <Header name="Sign Up" />,
+            headerStyle: {
+              backgroundColor: "#f8f4f4",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+            },
+            headerTitleStyle: {
+              fontSize: 10,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerTitle: () => <Header name="Guest" />,
             headerStyle: {
               backgroundColor: "#f8f4f4",
               shadowColor: "#000",

@@ -1,3 +1,4 @@
+import * as WebBrowser from "expo-web-browser";
 import React, { Component } from "react";
 import {
   ActivityIndicator,
@@ -13,6 +14,7 @@ class TrendingNews extends Component {
   state = {
     news: [],
   };
+  
 
   componentDidMount() {
     fetch(
@@ -40,9 +42,7 @@ class TrendingNews extends Component {
               <TouchableOpacity
                 key={index}
                 onPress={() =>
-                  this.props.navigation.navigate("WebView", {
-                    url: news.url,
-                  })
+                  WebBrowser.openBrowserAsync(news.url)
                 }
               >
                 <View style={{ margin: 5 }}>
