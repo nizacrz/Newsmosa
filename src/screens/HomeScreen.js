@@ -25,7 +25,6 @@ import ScreenWrapper from "../components/ScreenWrapper.js";
 import TrendingNews from "../components/TrendingNews.js";
 import NewsScreen from "../screens/NewsScreen";
 
-
 var date = new Date().getDate();
 
 const HomeScreen = () => {
@@ -35,44 +34,42 @@ const HomeScreen = () => {
   let greeting;
 
   if (hour < 12) {
-    greeting = 'Good Morning';
-  } else if (hour < 18 ) {
-    greeting = 'Good Afternoon';
+    greeting = "Good Morning";
+  } else if (hour < 18) {
+    greeting = "Good Afternoon";
   } else {
-    greeting = 'Good Evening';
+    greeting = "Good Evening";
   }
- const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date());
 
- const updateDate = () => {
-   setCurrentDate(new Date());
- };
+  const updateDate = () => {
+    setCurrentDate(new Date());
+  };
 
- useEffect(() => {
-   const interval = setInterval(updateDate, 86400000); // 86400000 milliseconds = 1 day
-   return () => clearInterval(interval);
- }, []);
-
- 
-  
+  useEffect(() => {
+    const interval = setInterval(updateDate, 86400000); // 86400000 milliseconds = 1 day
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <ScreenWrapper>
-      <LinearGradient
-        colors={["lightgray", "#176051"]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.container}
-      >
-        <View style={styles.greeting}>
-          <View style={styles.greetingHeader}>
-            <Text style={styles.greetingHeaderText}>{greeting}</Text>
-            <Text style={styles.greetingHeaderDate}>{currentDate.toDateString()}</Text>
-          </View>
-          <Image style={styles.profile_image} source={ProfileImage} />
+    <LinearGradient
+      colors={["lightgray", "#176051"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.container}
+    >
+      <View style={styles.greeting}>
+        <View style={styles.greetingHeader}>
+          <Text style={styles.greetingHeaderText}>{greeting}</Text>
+          <Text style={styles.greetingHeaderDate}>
+            {currentDate.toDateString()}
+          </Text>
         </View>
-        
-        {/* Search Bar */}
-        {/* <View style={styles.search_bar_wrapper}>
+        <Image style={styles.profile_image} source={ProfileImage} />
+      </View>
+
+      {/* Search Bar */}
+      {/* <View style={styles.search_bar_wrapper}>
           <TextInput
             value={search}
             onChangeText={setSearch}
@@ -80,21 +77,19 @@ const HomeScreen = () => {
           />
           <Ionicons name="search" size={24} color="#02474C" />
         </View> */}
-        
-        
-        
-        {/* <HomeCategoryTab labels={['Covid-19', 'TIP QC', 'SciTech', 'Sport', 'Government']} onPress={(index) => {
+
+      {/* <HomeCategoryTab labels={['Covid-19', 'TIP QC', 'SciTech', 'Sport', 'Government']} onPress={(index) => {
           console.log("hello");
           setTabIndex(index);
         }} color="#017e60" activeIndex={tabIndex} /> */}
 
-        <HomeCategoryTab  />
-        
-        <ScrollView>
-        <TrendingNews  />
+      <HomeCategoryTab />
 
-        <NewsScreen /> 
-          {/* <HomeCard
+      <ScrollView>
+        <TrendingNews />
+
+        <NewsScreen />
+        {/* <HomeCard
             text="Apply for our scholarship grants"
             source={HeadImage}
             onPress={() => {}}
@@ -121,12 +116,10 @@ const HomeScreen = () => {
             lengthDescription="10 minutes"
             onPress={() => {}}
           /> */}
-        </ScrollView>
-        
-      </LinearGradient>
-    </ScreenWrapper>
+      </ScrollView>
+    </LinearGradient>
   );
-    }
+};
 
 export default HomeScreen;
 

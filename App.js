@@ -78,7 +78,30 @@ function App() {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         tabBarActiveTintColor: "#176051",
+        tabBarOptions: {
+          activeTintColor: "#176051",
+          inactiveTintColor: "#666666",
+          style: {
+            backgroundColor: "#FFFFFF",
+            borderTopWidth: 0,
+            shadowColor: "#000000",
+            shadowOpacity: 0.1,
+            shadowRadius: 20,
+            shadowOffset: { width: 0, height: -5 },
+            elevation: 5,
+            height: 60,
+          },
+          labelStyle: {
+            fontSize: 12,
+            fontWeight: "bold",
+            marginBottom: 5,
+          },
+          tabStyle: {
+            justifyContent: "center",
+          },
+        },
       }}
     >
       <Tab.Screen
