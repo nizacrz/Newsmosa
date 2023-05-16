@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
+  Image,
   StyleSheet,
   Text,
-  Image,
   TextInput,
   TouchableOpacity,
   View,
@@ -68,6 +68,12 @@ const Login = () => {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={() => navigation.navigate("Home")}
+        style={styles.gButton}
+      >
+        <Text style={styles.buttonText}>Enter as Guest</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => navigation.navigate("Registration")}
         style={styles.link}
       >
@@ -103,10 +109,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    marginTop: 35,
+    marginTop: 25,
     marginBottom: 10,
     height: 60,
     width: 300,
+    backgroundColor: "#02474C",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 30,
+    shadowColor: "#000",
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 5 },
+    shadowRadius: 10,
+    elevation: 5,
+  },
+  gButton: {
+    marginTop: 5,
+    height: 30,
+    width: 150,
+    fontSize: 5,
     backgroundColor: "#02474C",
     alignItems: "center",
     justifyContent: "center",
