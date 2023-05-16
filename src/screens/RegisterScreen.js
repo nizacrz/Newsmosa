@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -10,6 +11,7 @@ import {
 import { firebase } from "../components/database/firebase";
 
 const Registration = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -94,8 +96,8 @@ const Registration = () => {
       </TouchableOpacity>
       <View style={styles.link}>
         <Text style={styles.loginText}>Already have an account?</Text>
-        <TouchableOpacity>
-          <Text style={styles.linkText}>Log in</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.linkText} >Log in</Text>
         </TouchableOpacity>
       </View>
     </View>
