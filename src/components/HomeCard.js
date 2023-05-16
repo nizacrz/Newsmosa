@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { TouchableRipple } from "react-native-paper";
-import HeadImage from "../../assets/images/headImage.jpg";
+import HeadImage from "../../assets/images/newsmosa_landing-2.png";
 
 const HomeCard = ({ text, source, onPress, isBookmarked = false }) => {
   return (
@@ -16,18 +16,6 @@ const HomeCard = ({ text, source, onPress, isBookmarked = false }) => {
         source={source ?? HeadImage}
         style={styles.header}
       >
-        <Ionicons
-          name={isBookmarked ? `bookmark` : `bookmark-outline`}
-          size={20}
-          color="#FFFFFF"
-          style={{
-            alignSelf: "flex-end",
-            padding: 8,
-            textShadowColor: "black",
-            textShadowRadius: 5,
-          }}
-        />
-
         <View>
           <Text style={styles.header_title}>{text}</Text>
         </View>
@@ -37,10 +25,11 @@ const HomeCard = ({ text, source, onPress, isBookmarked = false }) => {
 };
 const styles = StyleSheet.create({
   header: {
-    height: 300,
+    height: 150,
     marginVertical: 8,
     display: "flex",
     flexDirection: "column",
+    marginTop: 2,
   },
   header_image: {
     borderRadius: 10,

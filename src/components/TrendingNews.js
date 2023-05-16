@@ -48,7 +48,7 @@ class TrendingNews extends Component {
                 <View style={{ margin: 5 }}>
                   <Image
                     source={{ uri: `${news.urlToImage}` }}
-                    style={{ height: 95, width: 95, borderRadius: 10 }}
+                    style={{ height: 3, width: 150, borderRadius: 10 }}
                   />
                   <Text style={{ width: 100, textAlign: "justify" }}>
                     {news.title}

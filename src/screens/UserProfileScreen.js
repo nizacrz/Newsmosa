@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 15,
     paddingBottom: 15,
-    paddingTop: 10,
+    paddingTop: 20,
   },
   greeting: {
     fontSize: 35,

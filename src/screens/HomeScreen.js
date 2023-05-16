@@ -66,6 +66,7 @@ const HomeScreen = () => {
           </Text>
         </View>
       </View>
+      <HomeCard />
       <ScrollView>
         <HomeCategoryTab />
         <NewsScreen />
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
 
   greetingHeader: {
     flex: 1,
+    marginBottom: 12,
   },
 
   greetingHeaderText: {
@@ -98,6 +100,6 @@ const styles = StyleSheet.create({
   },
   greetingHeaderDate: {
     fontSize: 15,
-    marginBottom: 15,
+    marginBottom: 5,
   },
 });

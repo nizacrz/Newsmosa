@@ -26,7 +26,7 @@ class HomeCategoryTab extends Component {
             }
             style={{
               backgroundColor: "#02474C",
-              padding: 10,
+              padding: 12,
               borderRadius: 10,
               margin: 3,
             }}
