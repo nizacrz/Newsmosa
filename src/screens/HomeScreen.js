@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   greeting: {
+    marginTop: 20,
     display: "flex",
     flexDirection: "row",
   },
