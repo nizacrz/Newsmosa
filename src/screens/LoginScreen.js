@@ -71,7 +71,7 @@ const Login = () => {
         onPress={() => navigation.navigate("Home")}
         style={styles.gButton}
       >
-        <Text style={styles.buttonText}>Enter as Guest</Text>
+        <Text style={styles.gText}>Enter as Guest</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate("Registration")}
@@ -140,7 +140,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 25,
+    color: "#fff",
+  },
+  gText: {
+    fontSize: 14,
     color: "#fff",
   },
   link: {
