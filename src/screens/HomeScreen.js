@@ -34,11 +34,11 @@ const HomeScreen = () => {
   let greeting;
 
   if (hour < 12) {
-    greeting = "Good Morning";
+    greeting = "Good Morning!";
   } else if (hour < 18) {
-    greeting = "Good Afternoon";
+    greeting = "Good Afternoon!";
   } else {
-    greeting = "Good Evening";
+    greeting = "Good Evening!";
   }
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -65,57 +65,10 @@ const HomeScreen = () => {
             {currentDate.toDateString()}
           </Text>
         </View>
-        <Image style={styles.profile_image} source={ProfileImage} />
       </View>
-
-      {/* Search Bar */}
-      {/* <View style={styles.search_bar_wrapper}>
-          <TextInput
-            value={search}
-            onChangeText={setSearch}
-            style={styles.search_bar}
-          />
-          <Ionicons name="search" size={24} color="#02474C" />
-        </View> */}
-
-      {/* <HomeCategoryTab labels={['Covid-19', 'TIP QC', 'SciTech', 'Sport', 'Government']} onPress={(index) => {
-          console.log("hello");
-          setTabIndex(index);
-        }} color="#017e60" activeIndex={tabIndex} /> */}
-
-      <HomeCategoryTab />
-
       <ScrollView>
-        <TrendingNews />
-
+        <HomeCategoryTab />
         <NewsScreen />
-        {/* <HomeCard
-            text="Apply for our scholarship grants"
-            source={HeadImage}
-            onPress={() => {}}
-          />
-
-          <HomeCategoryCard
-            title="Holiday December, 25 2021. Click card for details."
-            image={CardImage1}
-            date={"May 6, 2023"}
-            lengthDescription="10 minutes"
-            onPress={() => {}}
-          />
-          <HomeCategoryCard
-            title="Admission for School Year 2023-2024 is ongoing."
-            image={CardImage2}
-            date={"May 7, 2023"}
-            lengthDescription="10 minutes"
-            onPress={() => {}}
-          />
-          <HomeCategoryCard
-            title="Come visit to T.I.P, Join our Campus Tour."
-            image={CardImage3}
-            date={"May 8, 2023"}
-            lengthDescription="10 minutes"
-            onPress={() => {}}
-          /> */}
       </ScrollView>
     </LinearGradient>
   );
@@ -127,13 +80,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 15,
-    paddingBottom: 15,
     paddingTop: 10,
   },
   greeting: {
     display: "flex",
     flexDirection: "row",
   },
+
   greetingHeader: {
     flex: 1,
   },
@@ -144,25 +97,6 @@ const styles = StyleSheet.create({
   },
   greetingHeaderDate: {
     fontSize: 15,
+    marginBottom: 15,
   },
-
-  profile_image: {
-    alignSelf: "center",
-    width: 70,
-    height: 70,
-    borderRadius: 9999,
-  },
-
-  search_bar_wrapper: {
-    display: "flex",
-    flexDirection: "row",
-    marginTop: 15,
-    padding: 5,
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 9999,
-  },
-
-  search_bar: { flex: 1 },
 });

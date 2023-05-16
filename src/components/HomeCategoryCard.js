@@ -1,25 +1,39 @@
-import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { TouchableRipple } from 'react-native-paper';
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { TouchableRipple } from "react-native-paper";
 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
-import Kermit from '../../assets/images/profile_image.jpg';
+import Kermit from "../../assets/images/profile_image.jpg";
 
-
-const HomeCategoryCard = ({image, title, date, lengthDescription, onPress, isBookmarked=false}) => {
+const HomeCategoryCard = ({
+  image,
+  title,
+  date,
+  lengthDescription,
+  onPress,
+  isBookmarked = false,
+}) => {
   return (
-    <TouchableRipple style={styles.touchable_ripple} onPress={onPress} borderless>
+    <TouchableRipple
+      style={styles.touchable_ripple}
+      onPress={onPress}
+      borderless
+    >
       <LinearGradient
         colors={["#017E60", "#176051"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.card_container}
       >
-        <Image source={image ?? Kermit} resizeMode="cover" style={styles.card_container_image} />
+        <Image
+          source={image ?? Kermit}
+          resizeMode="cover"
+          style={styles.card_container_image}
+        />
         <View style={styles.card_container_info}>
-          <View style={[styles.card_container_subtitle_wrapper, {flex: 1}]}>
+          <View style={[styles.card_container_subtitle_wrapper, { flex: 1 }]}>
             <Text
               style={styles.card_container_title}
               ellipsizeMode="tail"
@@ -45,14 +59,14 @@ const HomeCategoryCard = ({image, title, date, lengthDescription, onPress, isBoo
       </LinearGradient>
     </TouchableRipple>
   );
-}
+};
 
 const styles = StyleSheet.create({
   touchable_ripple: {
     backgroundColor: "#208974",
     marginVertical: 7,
     borderRadius: 25,
-    width: '100%',
+    width: "100%",
   },
   card_container: {
     display: "flex",
@@ -88,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeCategoryCard
+export default HomeCategoryCard;

@@ -1,43 +1,45 @@
-import React, { Component } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React, { Component } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 const categories = [
-  'Entertainment',
-  'Business',
-  'Politics',
-  'Health',
-  'Technology',
-  'Sports',
+  "Entertainment",
+  "Business",
+  "Politics",
+  "Health",
+  "Technology",
+  "Sports",
 ];
 
 class HomeCategoryTab extends Component {
   state = {};
   render() {
+    const { navigation } = this.props;
     return (
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {categories.map((category, index) => (
           <TouchableOpacity
-            style={color= "#017e60"}
             key={index}
             onPress={() =>
-              this.props.navigation.navigate('GetNews', {
+              navigation.navigate("GetNews", {
                 category,
               })
-            }>
-            <View>
-              <Text
-                style={{
-                  padding: 10,
-                  borderWidth: 1,
-                  borderColor: 'black',
-                  fontSize: 15,
-                  margin: 3,
-                  borderRadius: 10,
-
-                }}>
-                {category}
-              </Text>
-            </View>
+            }
+            style={{
+              backgroundColor: "#02474C",
+              padding: 10,
+              borderRadius: 10,
+              margin: 3,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
+              {category}
+            </Text>
           </TouchableOpacity>
         ))}
       </ScrollView>

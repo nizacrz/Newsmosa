@@ -55,7 +55,7 @@ const UserProfileScreen = () => {
 
   return (
     <LinearGradient
-      colors={["#FFC371", "#FF5F6D"]}
+      colors={["lightgray", "#176051"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}

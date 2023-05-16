@@ -37,7 +37,7 @@ const SearchScreen = () => {
   }, []);
   return (
     <LinearGradient
-      colors={["#F8A000", "#F5C301"]}
+      colors={["lightgray", "#176051"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}
